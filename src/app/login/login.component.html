@@ -1,0 +1,52 @@
+<div class="ui two column middle centered aligned stackable grid container">
+  <div class="center aligned column" style="margin-top:25px;">
+
+    <div class="ui vertical buttons">
+      <button  type="button" (click)="loginFb()" class="ui facebook button" style="width: 250px; margin:5px;">
+        <i class="facebook icon"></i>Login med Facebook</button>
+      <button  type="button" (click)="loginGoogle()" id="google" class="ui google plus button" style="width: 250px;margin:5px;">
+        <i class="google icon"></i>Login med Google</button>
+    </div>
+  </div>
+  <div class="divider-column">
+    <div class="ui vertical divider">
+      Eller
+    </div>
+  </div>
+  <div class="column">
+    <div class="ui form" style="padding:20px;" [ngClass]="{'error': hasError}">
+      <div class="form-container">
+        <div class="error message" *ngIf="hasError" [@fallIn]='state'>{{ error }}</div>
+        <form class="ui large form" #formData='ngForm' (ngSubmit)="onSubmit(formData)">
+          <div class="ui stacked">
+            <div class="field">
+              <div class="ui left icon input">
+                <i class="user icon"></i>
+                <input placeholder="E-mail address" (ngModel)="email" name="email" type="text">
+              </div>
+            </div>
+            <div class="field">
+              <div class="ui left icon input">
+                <i class="lock icon"></i>
+                <input (ngModel)="password" name="password" placeholder="Password" type="password">
+              </div>
+            </div>
+            <div class="ui grid stackable equal width">
+              <div class="column">
+                <button class="ui primary button" type="submit" [disabled]="!formData.valid" class="ui fluid button">
+                  <i class="user outline icon"></i>
+                  Log in</button>
+
+              </div>
+              <div class="column">
+                <button (click)="onSignUpSubmit(formData)" class="ui fluid positive button">
+                  <i class="mail icon"></i>Opret konto</button>
+
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

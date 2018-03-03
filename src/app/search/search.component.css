@@ -1,0 +1,24 @@
+:host-context(.menuTopBar) .menuTopBar{
+    background: transparent; 
+    border: 0;
+    border-width:0;
+    box-shadow:0px 0px 0px 0px !important;
+}
+
+:host-context(.menuTopBar) .frontpageItem{
+    display:none;
+}
+
+:host-context(.menuTopBar) .ui { 
+    display:none
+} 
+
+
+:host .menuTopBar{
+    display:none;
+}
+
+
+:host ::ng-deep .menuTopBar {
+    display: none;
+}

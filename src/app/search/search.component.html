@@ -1,0 +1,545 @@
+<style type="text/css">
+  .hidden.menu {
+    display: none;
+  }
+
+  .masthead.segment {
+    min-height: 900px;
+    padding: 1em 0em;
+  }
+
+  .masthead .logo.item img {
+    margin-right: 1em;
+  }
+
+  .masthead .ui.menu .ui.button {
+    margin-left: 0.5em;
+  }
+
+  #coverHeader {
+    margin-top: 15.5em;
+  }
+
+  .masthead h1.ui.header {
+
+    margin-bottom: 0em;
+    font-size: 4em;
+    font-weight: normal;
+  }
+
+  .masthead h2 {
+    font-size: 1.7em;
+    font-weight: normal;
+  }
+
+  .ui.vertical.stripe {
+    padding: 2em 0em;
+  }
+
+  .ui.vertical.stripe h3 {
+    font-size: 2em;
+  }
+
+  .ui.vertical.stripe .button+h3,
+  .ui.vertical.stripe p+h3 {
+    margin-top: 3em;
+  }
+
+  .ui.vertical.stripe .floated.image {
+    clear: both;
+  }
+
+  .ui.vertical.stripe p {
+    font-size: 1.33em;
+  }
+
+  .ui.vertical.stripe .horizontal.divider {
+    margin: 3em 0em;
+  }
+
+  .quote.stripe.segment {
+    padding: 0em;
+  }
+
+  .quote.stripe.segment .grid .column {
+    padding-top: 5em;
+    padding-bottom: 5em;
+  }
+
+  .footer.segment {
+    padding: 5em 0em;
+  }
+
+  .secondary.pointing.menu .toc.item {
+    display: none;
+  }
+
+  #cover {
+    background-image: url('/assets/hvidhest2.jpg');
+    background-size: cover;
+    background-repeat:no-repeat;
+-webkit-background-size:cover;
+-moz-background-size:cover;
+-o-background-size:cover;
+background-size:cover;
+background-position:center;
+  }
+
+  #mobileFilter {
+    display: none;
+  }
+
+  .ui.main.container{
+    min-height: 800px;
+  }
+
+  .card{
+    cursor: pointer;
+  }
+
+  @media only screen and (min-width: 1850px) {
+    #cards{
+      min-width: 1168px;
+      min-height: 300px;
+    }
+
+    .frontpage-btn{
+      font-size: 1.02rem;
+    }
+    
+  }
+  
+  @media only screen and (min-width: 451px) and (max-width: 1849px){
+    #cards{
+      min-width: 451px;
+      min-height: 300px;
+    }
+    
+    #cover {
+      background-image: url('/assets/hvidhest2.jpg');
+      background-size: cover;
+      background-repeat:no-repeat;
+      -webkit-background-size:cover;
+      -moz-background-size:cover;
+      -o-background-size:cover;
+      background-size:cover;
+      background-position:center;
+    }
+    .ui.fixed.menu {
+      display: none !important;
+    }
+
+    .secondary.pointing.menu .item,
+    .secondary.pointing.menu .menu {
+      display: none;
+    }
+    .secondary.pointing.menu .toc.item {
+      display: block;
+    }
+
+    .masthead.segment {
+      min-height: 500px;
+    }
+
+    #mobileFilter {
+      display: block;
+    }
+
+    #coverHeader {
+    margin-top: 7.5em;
+  }
+
+
+  }
+
+  @media only screen and (max-width: 450px) {
+    .ui.fixed.menu {
+      display: none !important;
+    }
+
+    #coverHeader {
+    margin-top: 16.5em;
+  }
+
+    #cards{
+      min-width: 250px;
+      min-height: 500px;
+    }
+    .secondary.pointing.menu .item,
+    .secondary.pointing.menu .menu {
+      display: none;
+    }
+    .secondary.pointing.menu .toc.item {
+      display: block;
+    }
+    .masthead.segment {
+      min-height: 500px;
+    }
+    .masthead h1.ui.header {
+      font-size: 2em;
+    }
+    .masthead h2 {
+      margin-top: 0.5em;
+      font-size: 1.5em;
+    }
+
+    .selection {
+      width: 100px !important;
+    }
+
+    #coverHeader {
+      max-width: 350px !important;
+
+    }
+
+    #cover {
+      background-image: url('/assets/hvidhest2_responsive.jpg');
+      background-size: cover;
+      
+    }
+
+    #mobileFilter {
+      display: block;
+    }
+
+    #frontpage-logo{
+      display:none;
+    }
+
+    #frontpage-create-btn{
+      margin-top: 5px;
+    }
+
+    .frontpage-btn{
+      font-size: .85714286rem;
+    }
+
+
+  }
+</style>
+
+<div class="ui inverted vertical masthead left aligned segment" id="cover">
+  <div class="ui container">
+    <div class="right menu">
+      <div class="item" *ngIf="auth.authState | async; then loggedIn else notLoggedIn;">
+          
+      </div>
+      <ng-template #loggedIn>
+          <div class="ui inverted button frontpage-btn">
+              <span class="text" routerLink="/profile/horsesList">Se profil</span>
+          </div>
+          <div class="ui inverted button frontpage-btn">
+              <span class="text" (click)="logout()">Log ud</span>
+          </div>
+        </ng-template>
+      <ng-template #notLoggedIn>
+          <div class="ui inverted button">
+              <span class="text" routerLink="/login">Login</span>
+          </div>
+      </ng-template>
+    </div>
+  </div>
+  <div class="ui text container" id="coverHeader">
+    <div class="ui grid">
+      <div class="five wide column" id="frontpage-logo" >
+        <img class="ui fluid image" src="/assets/isfaxi_7_hvid_mærke.png" >
+      </div>
+      <div class="eleven wide column">
+        <h1 class="ui inverted header">
+          <span class="library" style="font-size: 1.75em  ">isfaxi</span>
+        </h1>
+        <div class="tagline">Køb og salg af islandske heste</div>
+        <div class="ui inverted button frontpage-btn" (click)="scollToSearch()">Søg
+          <i class="right search icon"></i>
+        </div>
+        <a class="ui inverted button frontpage-btn" id="frontpage-create-btn" routerLink="/profile/horsesList">Opret annonce
+          <i class="right arrow icon"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ui main container" id="search">
+  <div class="ui middle aligned stackable grid container" style="margin-top: 20px">
+    <div id="cards" class="ui four doubling stackable cards ui segment raised" [class.loading]="isLoading">
+      <div class="ui top attached demo menu" id="mobileFilter">
+        <sui-accordion [closeOthers]="false" style="margin-top:0 !important;">
+          <sui-accordion-panel [isOpen]="false">
+            <div title style="margin-left: 10px">
+              <i class="dropdown icon"></i>
+              Filtrer...
+            </div>
+            <div content style="margin-top: 0px; margin-left: 10px">
+              <div class="ui grid">
+                <div class="six wide column">
+                  <div title>
+                    Region
+                  </div>
+                  <div content>
+                    <div class="ui form">
+                      <div class="grouped fields">
+                        <div class="field">
+                          <sui-checkbox (checkChange)="checkRegionChange($event, 'Sjælland')" class="ui checkbox">
+                            Sjælland
+                          </sui-checkbox>
+                        </div>
+                        <div class="field">
+                          <sui-checkbox (checkChange)="checkRegionChange($event, 'Fyn')" class="ui checkbox">
+                            Fyn
+                          </sui-checkbox>
+                        </div>
+                        <div class="field">
+                          <sui-checkbox (checkChange)="checkRegionChange($event, 'Sønderjylland')" class="ui checkbox">
+                            Sønderjylland
+                          </sui-checkbox>
+                        </div>
+                        <div class="field">
+                          <sui-checkbox (checkChange)="checkRegionChange($event, 'Nordjylland')" class="ui checkbox">
+                            Nordjylland
+                          </sui-checkbox>
+                        </div>
+                        <div class="field">
+                          <sui-checkbox (checkChange)="checkRegionChange($event, 'Midtjylland')" class="ui checkbox">
+                            Midtjylland
+                          </sui-checkbox>
+                        </div>
+                        <div class="field">
+                          <sui-checkbox (checkChange)="checkRegionChange($event, 'Østjylland')" class="ui checkbox">
+                            Østjylland
+                          </sui-checkbox>
+                        </div>
+                        <div class="field">
+                          <sui-checkbox (checkChange)="checkRegionChange($event, 'Island')" class="ui checkbox">
+                            Island
+                          </sui-checkbox>
+                        </div>
+                        <div class="field">
+                          <sui-checkbox (checkChange)="checkRegionChange($event, 'Andet land')" class="ui checkbox">
+                            Andet land
+                          </sui-checkbox>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="four wide column">
+                  <div title>
+                    Hestetype
+                  </div>
+                  <div content>
+                    <div class="ui form">
+                      <div class="grouped fields">
+                        <div class="field">
+                          <sui-checkbox (checkChange)="checkChange($event, 'Hingst')" class="ui checkbox">
+                            Hingst
+                          </sui-checkbox>
+                        </div>
+                        <div class="field">
+                          <sui-checkbox (checkChange)="checkChange($event, 'Vallak')" class="ui checkbox">
+                            Vallak
+                          </sui-checkbox>
+                        </div>
+                        <div class="field">
+                          <sui-checkbox (checkChange)="checkChange($event, 'Hoppe')" class="ui checkbox">
+                            Hoppe
+                          </sui-checkbox>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="six wide column">
+                  <div title>
+                    Pris - kr
+                  </div>
+                  <div content>
+                    <div class="ui form">
+                      <div class="grouped fields">
+                        <div class="field">
+                          <sui-checkbox (checkChange)="checkPriceChange($event, 0, 20000)" class="ui checkbox">
+                            0-20.000
+                          </sui-checkbox>
+                        </div>
+                        <div class="field">
+                          <sui-checkbox (checkChange)="checkPriceChange($event, 20000, 40000)" class="ui checkbox">
+                            20.000-40.000
+                          </sui-checkbox>
+                        </div>
+                        <div class="field">
+                          <sui-checkbox (checkChange)="checkPriceChange($event, 40000, 80000)" class="ui checkbox">
+                            40.000-80.000
+                          </sui-checkbox>
+                        </div>
+                        <div class="field">
+                          <sui-checkbox (checkChange)="checkPriceChange($event, 80000, 1000000000)" class="ui checkbox">
+                            80.000+
+                          </sui-checkbox>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </sui-accordion-panel>
+        </sui-accordion>
+
+
+
+
+      </div>
+
+      <div class="ui left rail">
+        <sui-accordion [closeOthers]="false" style="margin-top:0 !important;">
+          <sui-accordion-panel [isOpen]="true">
+            <div title>
+              <i class="dropdown icon"></i>
+              Filter
+            </div>
+            <div content style="margin-top: 0px; margin-left: 10px">
+              <sui-accordion [closeOthers]="false">
+                <sui-accordion-panel [isOpen]="true">
+                  <div title>
+                    <i class="dropdown icon"></i>
+                    Region
+                  </div>
+                  <div content>
+                    <div class="ui form">
+                      <div class="grouped fields">
+                        <div class="field">
+                          <sui-checkbox (checkChange)="checkRegionChange($event, 'Sjælland')" class="ui checkbox">
+                            Sjælland
+                          </sui-checkbox>
+                        </div>
+                        <div class="field">
+                          <sui-checkbox (checkChange)="checkRegionChange($event, 'Fyn')" class="ui checkbox">
+                            Fyn
+                          </sui-checkbox>
+                        </div>
+                        <div class="field">
+                          <sui-checkbox (checkChange)="checkRegionChange($event, 'Sønderjylland')" class="ui checkbox">
+                            Sønderjylland
+                          </sui-checkbox>
+                        </div>
+                        <div class="field">
+                          <sui-checkbox (checkChange)="checkRegionChange($event, 'Nordjylland')" class="ui checkbox">
+                            Nordjylland
+                          </sui-checkbox>
+                        </div>
+                        <div class="field">
+                          <sui-checkbox (checkChange)="checkRegionChange($event, 'Midtjylland')" class="ui checkbox">
+                            Midtjylland
+                          </sui-checkbox>
+                        </div>
+                        <div class="field">
+                          <sui-checkbox (checkChange)="checkRegionChange($event, 'Østjylland')" class="ui checkbox">
+                            Østjylland
+                          </sui-checkbox>
+                        </div>
+                        <div class="field">
+                          <sui-checkbox (checkChange)="checkRegionChange($event, 'Island')" class="ui checkbox">
+                            Island
+                          </sui-checkbox>
+                        </div>
+                        <div class="field">
+                          <sui-checkbox (checkChange)="checkRegionChange($event, 'Andet land')" class="ui checkbox">
+                            Andet land
+                          </sui-checkbox>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </sui-accordion-panel>
+              </sui-accordion>
+              <sui-accordion [closeOthers]="false">
+                <sui-accordion-panel [isOpen]="true">
+                  <div title>
+                    <i class="dropdown icon"></i>
+                    Hestetype
+                  </div>
+                  <div content>
+                    <div class="ui form">
+                      <div class="grouped fields">
+                        <div class="field">
+                          <sui-checkbox (checkChange)="checkChange($event, 'Hingst')" class="ui checkbox">
+                            Hingst
+                          </sui-checkbox>
+                        </div>
+                        <div class="field">
+                          <sui-checkbox (checkChange)="checkChange($event, 'Hoppe')" class="ui checkbox">
+                            Hoppe
+                          </sui-checkbox>
+                        </div>
+                        <div class="field">
+                          <sui-checkbox (checkChange)="checkChange($event, 'Vallak')" class="ui checkbox">
+                            Vallak
+                          </sui-checkbox>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </sui-accordion-panel>
+              </sui-accordion>
+              <sui-accordion [closeOthers]="false">
+                <sui-accordion-panel [isOpen]="true">
+                  <div title>
+                    <i class="dropdown icon"></i>
+                    Pris
+                  </div>
+                  <div content>
+                    <div class="ui form">
+                      <div class="grouped fields">
+                        <div class="field">
+                          <sui-checkbox (checkChange)="checkPriceChange($event, 0, 20000)" class="ui checkbox">
+                            0 - 20.000 kr
+                          </sui-checkbox>
+                          <div class="field">
+                            <sui-checkbox (checkChange)="checkPriceChange($event, 20000, 40000)" class="ui checkbox">
+                              20.000 - 40.000 kr
+                            </sui-checkbox>
+                          </div>
+                          <div class="field">
+                            <sui-checkbox (checkChange)="checkPriceChange($event, 40000, 80000)" class="ui checkbox">
+                              40.000 - 80.000 kr
+                            </sui-checkbox>
+                          </div>
+                          <div class="field">
+                            <sui-checkbox (checkChange)="checkPriceChange($event, 80000, 10000000)" class="ui checkbox">
+                              80.000+ kr
+                            </sui-checkbox>
+                          </div>
+                        </div>
+                        </div>
+                      </div>
+                    </div>
+                </sui-accordion-panel>
+              </sui-accordion>
+              </div>
+          </sui-accordion-panel>
+        </sui-accordion>
+        </div>
+
+        <div class="ui fluid card" *ngFor="let item of items | async" style="min-width: 250px;">
+          <div class="image" [routerLink]="['/detail', item.id]">
+            <img width="300px" [src]="item.image1">
+          </div>
+          <div class="content">
+            <div class="header">{{ item.headline }}</div>
+            <div class="meta">
+              <a>{{ item.genderType }} {{ item.age > 0 ? ' - ' + item.age + ' år'  : ''  }}</a>
+            </div>
+          </div>
+          <div class="extra content">
+            <span class="right floated">
+              <i class="marker icon"></i>
+              {{ item.area }}
+            </span>
+            <span>
+              <i class="tag icon"></i>
+              {{item.price}} kr.
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>

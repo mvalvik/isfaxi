@@ -1,20 +1,173 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{title}}!
-  </h1>
-  <img width="300" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<style type="text/css">
+  .hidden.menu {
+    display: none;
+  }
 
+  .masthead.segment {
+    min-height: 700px;
+    padding: 1em 0em;
+  }
+
+  .masthead .logo.item img {
+    margin-right: 1em;
+  }
+
+  .masthead .ui.menu .ui.button {
+    margin-left: 0.5em;
+  }
+
+  .masthead h1.ui.header {
+    margin-top: 3em;
+    margin-bottom: 0em;
+    font-size: 4em;
+    font-weight: normal;
+  }
+
+  .masthead h2 {
+    font-size: 1.7em;
+    font-weight: normal;
+  }
+
+  .ui.vertical.stripe {
+    padding: 2em 0em;
+  }
+
+  .ui.vertical.stripe h3 {
+    font-size: 2em;
+  }
+
+  .ui.vertical.stripe .button+h3,
+  .ui.vertical.stripe p+h3 {
+    margin-top: 3em;
+  }
+
+  .ui.vertical.stripe .floated.image {
+    clear: both;
+  }
+
+  .ui.vertical.stripe p {
+    font-size: 1.33em;
+  }
+
+  .ui.vertical.stripe .horizontal.divider {
+    margin: 3em 0em;
+  }
+
+  .quote.stripe.segment {
+    padding: 0em;
+  }
+
+  .quote.stripe.segment .grid .column {
+    padding-top: 5em;
+    padding-bottom: 5em;
+  }
+
+  .footer.segment {
+    padding: 5em 0em;
+  }
+
+  .secondary.pointing.menu .toc.item {
+    display: none;
+  }
+
+  @media only screen and (max-width: 700px) {
+    .ui.fixed.menu {
+      display: none !important;
+    }
+    .secondary.pointing.menu .item,
+    .secondary.pointing.menu .menu {
+      display: none;
+    }
+    .secondary.pointing.menu .toc.item {
+      display: block;
+    }
+    .masthead.segment {
+      min-height: 350px;
+    }
+    .masthead h1.ui.header {
+      font-size: 2em;
+      margin-top: 1.5em;
+    }
+    .masthead h2 {
+      margin-top: 0.5em;
+      font-size: 1.5em;
+    }
+
+    .frontpage {
+      display: none;
+    }
+    
+  }
+</style>
+
+
+
+
+
+<!-- Sidebar Menu -->
+<div class="ui vertical inverted sidebar menu" display="none">
+  <a class="active item">Home</a>
+  <a class="item">Work</a>
+  <a class="item">Company</a>
+  <a class="item">Careers</a>
+  <a class="item">Login</a>
+  <a class="item">Signup</a>
+</div>
+
+<!-- Following Menu -->
+<div *ngIf="this.router.url != '/'" id="menuTopBar" class="ui menu following bar menuTopBar" style="margin-top: 0"  >
+  <div class="ui container">
+    <a class="item frontpageItem" routerLink="/" routerLinkActive="frontpage">Forside</a>
+    <a class="item frontpageItem" routerLink="/" fragment="search" >Søg</a>
+    <div class="right menu" *ngIf="loggedInUser | async; let user; else loggedOutBlock">
+      <div class="item">
+        <a class="ui primary button" routerLink="/profile/horsesList">Profil</a>
+      </div>
+      <div class="item">
+        <a class="ui primary button" (click)="logout()">Log ud</a>
+      </div>
+    </div>
+    <ng-template #loggedOutBlock>
+      <div class="right menu">
+        <div class="item">
+          <div class="ui pointing dropdown primary button">
+            <span class="text" routerLink="/login">Login</span>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</div>
+
+
+
+<!-- Page Contents -->
+<div class="pusher">
+    <router-outlet></router-outlet>
+  
+    <div class="ui inverted vertical footer segment">
+      <div class="ui container">
+        <div class="ui stackable inverted divided equal height stackable grid">
+          <div class="three wide column">
+            <h4 class="ui inverted header">Stutterier</h4>
+            <div class="ui inverted link list">
+              <a href="http://www.stuttericanada.dk/" class="item">Stutteri Canada</a>
+            </div>
+          </div>
+          <div class="three wide column">
+            <h4 class="ui inverted header">Links</h4>
+            <div class="ui inverted link list">
+              <a href="http://www.horsesoficeland.is/" class="item">Horses of Iceland</a>
+            </div>
+          </div>
+          <div class="three wide column">
+            <h4 class="ui inverted header">Kontakt</h4>
+            <a href="mailto:info@isfaxi.dk">info@isfaxi.dk</a>
+            <div class="row"></div>
+            <a style="color: inherit;" href="https://www.facebook.com/Isfaxi-205817663303532/"><i class="facebook icon"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

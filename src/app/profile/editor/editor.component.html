@@ -1,0 +1,197 @@
+<div class="ui middle aligned stackable grid container">
+  <div class="ui column">
+    <form class="ui form" [formGroup]="horseForm" [ngClass]="{'error': invalidFormSubmit, 'loading': isSaving}">
+
+      <h2 class="ui dividing header">{{ horse != null ? "Rediger annonce" : "Opret annonce" }}</h2>
+
+      <div class="required field" [ngClass]="{'error': horseForm.get('headline').invalid && invalidFormSubmit}">
+        <label class="center-block">Overskrift</label>
+        <input formControlName="headline" required maxlength="75">
+      </div>
+
+      <div class="two fields">
+        <div class="field">
+          <label class="center-block">Hestenavn
+          </label>
+          <input formControlName="name">
+        </div>
+      </div>
+      <div class="three fields">
+        <div class="field">
+          <label class="center-block">Køn
+          </label>
+          <select class="ui dropdown" formControlName="genderType" placeholder="Vælg køn">
+              <option *ngFor='let genderType of genderTypes' [value]='genderType'>{{genderType}}</option>
+            </select>
+        </div>
+        <div class="field">
+          <label class="center-block">Alder
+            </label>
+            <input formControlName="age" type="number" min="0" max="50" pattern="\d*">
+        </div>
+        <div class="field">
+          <label class="center-block">Højde
+            </label>
+            <input formControlName="height" type="number" min="0" max="200" pattern="\d*">
+        </div>
+      </div>
+      <div class="three fields">
+        <div class="required field"  [ngClass]="{'error': horseForm.get('price').invalid && invalidFormSubmit}"> 
+          <label class="center-block">Pris
+          </label>
+          <input formControlName="price" input type="number" pattern="\d*">
+        </div>
+        <div class="field">
+            <label class="center-block">Gangart
+            </label>
+            <select formControlName="gaitType" placeholder="Vælg gangart">
+                <option *ngFor='let gaitType of gaitTypes' [value]='gaitType'>{{gaitType}}</option>
+              </select>
+          </div>
+
+          
+      </div>
+
+      <div class="two fields">
+        <div class="field">
+          <label class="center-block">FEIF NR
+          </label>
+          <input formControlName="feifNr">
+          
+        </div>
+
+        <div class="field">
+          <label class="center-block">Blup
+          </label>
+          <input formControlName="blup">
+          
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="center-block">Beskrivelse
+          <textarea formControlName="description" type="text" rows="15"></textarea>
+        </label>
+      </div>
+
+      <h4 class="ui dividing header">Kontakt</h4>
+
+      <div class="field">
+        <label>Navn/stutteri</label>
+        <div class="three fields">
+          <div class="eight wide field">
+            <input name="shipping[first-name]" formControlName="adressName" placeholder="Navn/stutteri" type="text">
+          </div>
+          <div class="right four field required" [ngClass]="{'error': horseForm.get('area').invalid && invalidFormSubmit}">
+            <select formControlName="area" required >
+              <option *ngFor='let areaType of areaTypes' [value]='areaType'>{{areaType}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Adresse</label>
+        <div class="three fields">
+          <div class="six wide field">
+            <input formControlName="adressStreet" placeholder="Gadenavn" type="text">
+          </div>
+          <div class="two wide field">
+            <input formControlName="adressPostcode" placeholder="Postnummer" type="text">
+          </div>
+          <div class="six wide field">
+              <input formControlName="adressCity" placeholder="By" type="text">
+            </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Kontakt</label>
+        <div class="three fields">
+          <div class="field">
+            <input formControlName="adressTelephone" placeholder="Telefon" type="text">
+          </div>
+          <div class="field">
+            <input formControlName="adressEmail" placeholder="Email" type="text">
+          </div>
+          <div class="field">
+            <input formControlName="adressWeb" placeholder="Website" type="text">
+          </div>
+        </div>
+      </div>
+      <h4 class="ui dividing header"><i class="ui icon image"></i>Vælg nyt billede til forside</h4>
+      <div class="two fields">
+        <div class="field">
+          <app-upload-form #imageComponent1 [formGroup]="horseForm" [horse]="selectedHorse" [imageFormKey]="image1"></app-upload-form>
+        </div>
+      </div>
+
+      <h4 class="ui dividing header"><i class="ui icon image"></i>Flere billeder</h4>
+      <div class="two fields">
+          <div class="field">
+              <img *ngIf="uploadedImage2 != null" [src]="uploadedImage2" style="max-height: 300px; max-width: 300px; height: auto; width: auto;">  
+              <div class="field">
+                  <div class="ui action file input">
+                    <label for="file"><i class="attach icon"></i>Klik for at uploade billede..</label>
+                    <input id="file" type="file" (change)="onImage2Change($event, 'image2')" accept="image/*">
+                   <label class="ui icon button" (click)="deleteImage(2)"><i class="red delete icon"></i></label>
+                  </div>
+               </div>
+              </div>
+              <div class="field">
+                  <img *ngIf="uploadedImage3 != null" [src]="uploadedImage3" style="max-height: 300px; max-width: 300px; height: auto; width: auto;">  
+                  <div class="field">
+                      <div class="ui action file input">
+                        <label for="file3"><i class="attach icon"></i>Klik for at uploade billede..</label>
+                        <input id="file3" type="file" (change)="onImage2Change($event, 'image3')" accept="image/*">
+                       <label class="ui icon button" (click)="deleteImage(3)"><i class="red delete icon"></i></label>
+                      </div>
+                   </div>
+                  </div>
+      </div>
+
+
+      <div class="two fields">
+          <div class="field">
+            <div class="segment">
+              <img *ngIf="uploadedImage4 != null" [src]="uploadedImage4" style="max-height: 300px; max-width: 300px; height: auto; width: auto;">  
+              <div class="field">
+                  <div class="ui action file input">
+                    <label for="file4"><i class="attach icon"></i>Klik for at uploade billede..</label>
+                    <input id="file4" type="file" (change)="onImage2Change($event, 'image4')" accept="image/*">
+                   <label class="ui icon button" (click)="deleteImage(4)"><i class="red delete icon"></i></label>
+                  </div>
+               </div>
+              </div>
+            </div>
+      </div>
+
+      <h4 class="ui dividing header"><i class="ui icon youtube play"></i>Youtube-video</h4>
+      <div class="two fields">
+        <div class="field">
+          <div class="ui labeled input">
+            <input type="text" formControlName="videoUrl" placeholder="Link til Youtube video">
+          </div>
+        </div>
+      </div>
+      <h4 class="ui dividing header"></h4>
+
+      <button type="submit" (click)="onSubmit()" [ngClass]="{'loading': isSaving}" class="ui primary button">Gem</button>
+      <div class="ui error message">
+        <div class="header">Der blev fundet fejl ved validering af annoncen</div>
+        <ul class="list">
+          <li *ngIf="horseForm.get('headline').invalid">
+            Overskrift er påkrævet felt.
+          </li>
+          <li *ngIf="horseForm.get('price').invalid">
+            Pris er påkrævet felt.
+          </li>
+          <li *ngIf="horseForm.get('area').invalid">
+            Vælg et område.
+          </li>
+        </ul>
+      </div>
+
+    </form>
+  </div>
+</div>

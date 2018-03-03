@@ -1,0 +1,19 @@
+<div *ngIf="editMode; else viewMode;" class="field" [formGroup]="formGroup" style="padding: 10">
+  <img-cropper #cropper [image]="data" [settings]="cropperSettings"></img-cropper>
+  <div class="file-upload">
+    <input id="custom-input" type="file" accept="image" (change)="fileChangeListener($event)">
+  </div>
+  <div class="ui labeled icon button" (click)="uploadSingle()">
+    <i class="crop icon"></i>Beskær billede</div>
+</div>
+
+<ng-template #viewMode>
+  <div class="row" style="min-height: 300px;">
+    <img [src]="data.image" height="300px;">
+  </div>
+  <div class="row">
+    <div class="ui labeled icon button" (click)="setEditMode()">
+      <i class="upload icon"></i>
+      Vælg billede</div>
+  </div>
+</ng-template>

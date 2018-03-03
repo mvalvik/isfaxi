@@ -1,0 +1,168 @@
+<div class="ui vertical stripe segment">
+  <div *ngIf="iSspinnerActive" class="ui active dimmer">
+    <div class="ui loader"></div>
+  </div>
+  <div class="ui aligned stackable two column grid container">
+    <div class="nine wide column">
+      <owl-carousel [options]="{items: 1, dots: true, navigation: true, nav:true}" [items]="images" [carouselClasses]="['owl-theme', 'row', 'sliding']">
+        <div class="item deal-slide" *ngFor="let image of images;let i = index">
+          <div class="coupons-div" style="cursor:pointer;">
+            <img class="deals-image" src="{{image}}" (click)="onClick(i)" />
+          </div>
+        </div>
+      </owl-carousel>
+    </div>
+    <div class="six wide column">
+      <h2 class="ui dividing header">
+        {{ (horse | async)?.headline }}
+        
+        <div class="ui sub header" style="margin-top: 20px !important; margin-bottom: 20px !important">
+          <div class="ui equal width two columns grid" >
+              <div class="column">{{ (horse | async)?.name }}</div>
+              <div class="column left floated">
+                  <a class="ui blue large tag label">{{ (horse | async)?.price }} kr.</a>
+              </div>        
+          </div>
+        </div>
+  
+      </h2>
+
+      <div class="ui equal width two columns grid">
+        
+          
+        <div class="column"><label>Alder: </label> {{ (horse | async)?.age }} år</div>
+        <div class="column"><label>Køn: </label>{{ (horse | async)?.genderType }}</div>
+
+        <div class="column"><label>Feif-nr: </label>{{ (horse | async)?.feifNr }}</div>
+
+        <div class="column"><label>Gangart: </label> {{ (horse | async)?.gaitType }}</div>
+        <div class="column"><label>Blup: </label>{{ (horse | async)?.blup }}</div>
+        <div class="column"><label>Højde: </label>{{ (horse | async)?.height }}</div>
+        
+
+      </div>  
+      <h4 class="ui top attached header">
+          Beskrivelse
+      </h4>
+      <div class="ui attached segment">
+        <p style="white-space: pre-wrap;">{{ (horse | async)?.description}}</p>
+      </div>
+
+      <table class="ui celled table">
+        <thead>
+          <tr>
+            <th>Kontaktoplysninger</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                  <i class="icon user"></i>{{ (horse | async)?.adressName }}</td>
+              </tr>
+          <tr>
+            <td>
+              <i class="icon marker"></i> {{ (horse | async)?.adressStreet }}, {{ (horse | async)?.adressCity }}, {{ (horse | async)?.adressPostcode }} </td>
+          </tr>
+          <tr>
+              <td>
+                <i class="icon marker"></i> {{ (horse | async)?.area }}</td>
+            </tr>
+          <tr>
+            <td>
+              <i class="icon phone"></i>{{ (horse | async)?.adressTelephone }}</td>
+          </tr>
+          <tr>
+              <td><i class="icon mail"></i>{{ (horse | async)?.adressEmail }}</td>
+          </tr>
+          <tr>
+            <td>
+              <i class="icon world"></i>
+              <a href="http://{{(horse | async)?.adressWeb}}">{{ (horse | async)?.adressWeb }}</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <a class="ui primary button" [href]="'mailto:' + (horse | async)?.adressEmail">
+        <i class="icon mail outline"></i>
+          Kontakt
+      </a>
+      <a *ngIf="isEditable" class="ui basic button" routerLink="/profile/horsesList">
+        <i class="icon edit"></i>
+        Rediger
+    </a>
+    </div>
+  </div>
+
+  <div class="row">
+  </div>
+
+  <!-- Root element of PhotoSwipe. Must have class pswp. -->
+  <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true" #photoSwipe>
+
+    <!-- Background of PhotoSwipe. 
+                  It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+      <!-- Container that holds slides. 
+                  PhotoSwipe keeps only 3 of them in the DOM to save memory.
+                  Don't modify these 3 pswp__item elements, data is added later on. -->
+      <div class="pswp__container">
+        <div class="pswp__item"></div>
+        <div class="pswp__item"></div>
+        <div class="pswp__item"></div>
+      </div>
+
+      <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+      <div class="pswp__ui pswp__ui--hidden">
+
+        <div class="pswp__top-bar">
+
+          <!--  Controls are self-explanatory. Order can be changed. -->
+
+          <div class="pswp__counter"></div>
+
+          <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+          <button class="pswp__button pswp__button--share" title="Share"></button>
+          <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+          <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+          <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+          <!-- element will get class pswp__preloader--active when preloader is running -->
+          <div class="pswp__preloader">
+            <div class="pswp__preloader__icn">
+              <div class="pswp__preloader__cut">
+                <div class="pswp__preloader__donut"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+          <div class="pswp__share-tooltip"></div>
+        </div>
+
+        <button class="pswp__button pswp__button--arrow--left" title="Forrige"></button>
+        <button class="pswp__button pswp__button--arrow--right" title="Næste"></button>
+
+        <div class="pswp__caption">
+          <div class="pswp__caption__center"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <h5 class="ui horizontal header divider" *ngIf="hasVideo">
+    <i class="film icon"></i>
+    Video
+  </h5>
+
+
+
+  <div class="ui centered stackable column grid container" style="margin: 20px;" *ngIf="hasVideo">
+    <div class="segment intrinsic-container intrinsic-container-16x9">
+      <iframe id="ytplayer" type="text/html" [src]="videoUrl"></iframe>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+<div class="ui vertical stripe segment">
+  <div class="ui middle centered aligned stackable grid container">
+    <div class="form-container">
+      <span class="error" *ngIf="error" [@fallIn]='state'>{{ error }}</span>
+      <form class="ui large form" #formData='ngForm' (ngSubmit)="onSubmit(formData)">
+        <div class="ui stacked segment">
+          <div class="field">
+            <div class="ui left icon input">
+              <i class="user icon"></i>
+              <input placeholder="E-mail address" (ngModel)="email" name="email" type="text">
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui left icon input">
+              <i class="lock icon"></i>
+              <input (ngModel)="password" name="password" placeholder="Password" type="password">
+            </div>
+          </div>
+          <button type="submit" [disabled]="!formData.valid" class="ui fluid large submit button">Opret konto</button>
+        </div>
+
+        <div class="ui error message"></div>
+
+      </form>
+    </div>
+  </div>
+</div>

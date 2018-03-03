@@ -1,0 +1,8 @@
+.frontpage{
+    background: transparent;
+    border: 0;
+  }
+
+.frontpageItem{
+    display: none;
+  }

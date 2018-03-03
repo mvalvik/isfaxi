@@ -1,0 +1,61 @@
+<div class="ui middle aligned stackable grid container">
+    <div class="ui column">
+        <h2 class="ui dividing header">Kontakt</h2>
+        <form class="ui form" [formGroup]="contactInfoForm" (ngSubmit)="onSubmit()" [ngClass]="{'loading': isSaving, 'success': isSaved}">
+            <div class="field">
+                <div class="three fields">
+                    <div class="eight wide field">
+                        <label>Navn/stutteri</label>
+                        <input name="shipping[first-name]" formControlName="adressName" placeholder="Navn/stutteri" type="text">
+                    </div>
+                    <div class="right four field">
+                        <label>Region</label>
+                        <select required formControlName="area" required>
+                            <option *ngFor='let areaType of areaTypes' [value]='areaType'>{{areaType}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="four fields">
+                    <div class="six wide field">
+                        <label>Gadenavn og nummer</label>
+                        <input formControlName="adressStreet" placeholder="Gadenavn og nummer" type="text">
+                    </div>
+                    <div class="two wide field">
+                        <label>Postnummer</label>
+                        <input formControlName="adressPostcode" placeholder="Postnummer" type="text">
+                    </div>
+                    <div class="six wide field">
+                        <label>By</label>
+                        <input formControlName="adressCity" placeholder="By" type="text">
+                    </div>
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="three fields">
+                    <div class="field">
+                        <label>Telefon</label>
+                        <input formControlName="adressTelephone" placeholder="Telefon" type="text">
+                    </div>
+                    <div class="field">
+                        <label>Email</label>
+                        <input formControlName="adressEmail" placeholder="Email" type="text">
+                    </div>
+                    <div class="field">
+                        <label>Website</label>
+                        <input formControlName="adressWeb" placeholder="Website" type="text">
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" [ngClass]="{'loading': isSaving}" class="ui primary submit button">Gem</button>
+            <div class="ui success message">
+                <div class="header">Kontaktoplysninger er opdateret</div>
+                <p>Kontaktoplysningerne vil automatisk indsættes i dine annoncer når du opretter nye annoncer.</p>
+            </div>
+        </form>
+    </div>
+</div>

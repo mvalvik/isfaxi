@@ -1,0 +1,37 @@
+<div class="ui vertical stripe segment">
+    <div class="ui middle aligned stackable container">
+        <h2 class="ui dividing header" *ngIf="selectedHorse == null">Annoncer</h2>
+        <div class="row"></div>
+      <div class="row" *ngIf="selectedHorse != null">
+        <app-editor [horse]="selectedHorse"></app-editor>
+      </div>
+      <div class="row" *ngIf="selectedHorse == null">
+        <div class="ui link cards">
+          <div class="card" *ngFor="let horse of horses | async" >
+            <div class="image" [routerLink]="['/detail', horse.id]">
+              <img [src]="horse.image1">
+            </div>
+            <div class="content">
+              <div class="header">{{ horse.headline }}</div>
+              <div class="meta">
+                <a>{{ horse.genderType }} {{ horse.age > 0 ? ' - ' + horse.age + ' år'  : ''  }}</a>
+              </div>
+            </div>
+            <div class="extra content">
+              <div class="ui two buttons">
+                <div class="ui basic green button" (click)="select(horse)">Rediger</div>
+                <div class="ui basic red button" (click)="delete(horse)">Slet</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <ng-template #noHorsesBlock>
+        <button class="ui button positive">Opret annonce</button>
+      </ng-template>
+    </div>
+  
+  
+  
+  
+  
